@@ -47,7 +47,7 @@ fetch("/setup")
     var basicPriceId = json.basicPrice;
     var proPriceId = json.proPrice;
 
-    var stripe = Stripe(publishableKey);
+    var stripe = Stripe('pk_test_51IZEoiI7JRWuWnK1XNqlYCeYxJwNNdrdP7fAKuHgrRWH0FBM8cR6esA0qVz8xh3tYv0MYAmtcLZMQmQwgX5eTqcm00nV0mJRRl');
     // Setup event handler to create a Checkout Session when button is clicked
     document
       .getElementById("basic-plan-btn")
