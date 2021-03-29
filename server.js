@@ -12,8 +12,8 @@ post("/create-checkout-session", (request, response) -> {
     // the actual Session ID is returned in the query parameter when your customer
     // is redirected to the success page.
     SessionCreateParams params = new SessionCreateParams.Builder()
-        .setSuccessUrl("https://example.com/success.html?session_id={CHECKOUT_SESSION_ID}")
-        .setCancelUrl("https://example.com/canceled.html")
+        .setSuccessUrl("success.html?session_id={CHECKOUT_SESSION_ID}")
+        .setCancelUrl("canceled.html")
         .addPaymentMethodType(SessionCreateParams.PaymentMethodType.CARD)
         .setMode(SessionCreateParams.Mode.SUBSCRIPTION)
         .addLineItem(new SessionCreateParams.LineItem.Builder()
