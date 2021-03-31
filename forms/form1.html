@@ -1,0 +1,428 @@
+<html>
+
+<head>
+
+<script src="assets/jquery.min.js" type="text/javascript"></script>
+<script src="assets/bootstrap.min.js" type="text/javascript"></script>
+<link href="assets/bootstrap.min.css" media="screen" type="text/css" rel="stylesheet">
+
+<style>
+.formContainerBox {
+    background-color: #31455F;
+    padding: 40px 30px;
+    text-align: center;
+    color: white;
+    flex-basis: 50%;
+    max-width: 700px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+
+
+.requiredfield {
+    color: transparent;
+    text-align: center;
+    font-size: 1.4em;
+    padding: 0.2em;
+}
+
+input {
+    line-height: normal!important;
+    width:  calc(100% - 10px)!important;
+    height: 2.5em!important;
+    border-radius: 0.3em!important;
+    border-style: none!important;
+    padding-left: 10px!important;
+    margin: 10px 0 10px 0px!important;
+}
+
+select {
+    line-height: normal!important;
+    width: calc(100% - 10px)!important;
+    height: 40px!important;
+    font-size: 16px;
+    border-radius: 0.3em!important;
+    border-style: none!important;
+    padding-left: 10px!important;
+    margin: 10px 0 10px 0px!important;
+    color: initial;
+}
+
+.submitBtn{
+    width: 100%!important;
+    margin-top: 1em;
+    height: 2.5em;
+    border-radius: 0.3em;
+    border-style: none;
+    color: white;
+    background-color: #42CCAD;
+    font-size: 1.2em;
+    -webkit-appearance: none;
+}
+
+a.ctaBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-style: none;
+    border-radius: 5px;
+    max-width: 492px;
+    width: 100%;
+    height: 82px;
+    background: #42CCAD;
+    border: 1px solid #42CCAD;
+    text-shadow: none;
+    color: #fff;
+    font-size: 24px;
+    line-height: 29px;
+    font-weight: 400;
+    font-family: arial;
+    font-style: normal;
+    margin: 100px auto 20px auto;
+}
+
+.has-error {color:red;}
+
+input[type="email"],input[type="text"],select:focus,
+textarea {
+  font-size: 16px;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+<div class="container-fluid" style="background-color:#31455F">
+<div class="container marketing pt-0 pb-0">
+
+    <div class="row featurette text-center d-flex flex-wrap-reverse">
+
+      <div class="col-md-12">
+      
+<div class="formContainerBox" id="formContainerBox">
+        <form id="form" name="pension-advisers.co.uk" data-netlify="true" action="thankyou/index.html">
+
+					<fieldset id="step1" >
+						<div class=" pt-2 font-weight-bold text-left"><h1>Enter Your Postcode To Connect With a Local Pension Adviser</h1></div>
+						<div class="row col-12 pr-0 form-inline">
+                <div class="col-2 col-sm-2 col-md-2 text-right">
+                    <img src="assets/img/9f778e42-cb98-4ee8-981a-229498b22c12.png" class="rounded" style="height:30px ;width:30px;" alt="...">
+                </div>
+                <div class="col-10 offset-0 col-sm-10 offset-sm-0 col-md-10   offset-md-0 text-left">
+                    <div class="pt-3 pb-3 pr-0 text-left"><h4>Get a FREE Pensions Consultation with an FCA certified Pensions Adviser</h4></div>
+                </div>
+            </div>
+            
+            <div placeholder="Select Type of Advice" value="default" id="form-1_F_694_PENSION_ADVICE_TYPE2_SELECT" >
+    <div class="input">
+        <select id="PENSION_ADVICE_TYPE2_SELECT" name="PENSION_ADVICE_TYPE2_SELECT" placeholder="Select Type of Advice">
+            <option value="" disabled selected >Select the type of advice you need</option>
+            <option id="General Retirement" value="General Retirement" >General Retirement</option>
+            <option id="General Pension" value="General Pension" >General Pension</option>
+            <option id="Annuity" value="Annuity" >Annuity</option>
+            <option id="Drawdown" value="Drawdown" >Drawdown</option>
+            <option id="Final Salary" value="Final Salary" >Final Salary</option>
+            <option id="Defined Benefit Pension" value="Defined Benefit Pension" >Defined Benefit Pension</option>
+            <option id="Pension Transfer" value="Pension Transfer" >Pension Transfer / Consolidation</option>
+            <option id="Pension Review" value="Pension Review" >Pension Review</option>
+            <option id="New Pension" value="New Pension" >New Pension</option>
+        </select>
+        <div class="error-message"></div>
+    </div>
+</div>
+<div >
+    <div class="input">
+        <input type="text" id="postcode" name="postcode" placeholder="Postcode"  value="">
+        <div class="error-message"></div>
+    </div>
+</div>
+                
+				<input type="hidden" id="pl_matchtype" name="pl_matchtype" value="">
+			    <input type="hidden" id="pl_campaignid" name="pl_campaignid" value="">
+				<input type="hidden" id="pl_adgroupid" name="pl_adgroupid" value="">
+				<input type="hidden" id="pl_network" name="pl_network" value="">
+				<input type="hidden" id="pl_device" name="pl_device" value="">
+				<input type="hidden" id="pl_devicemodel" name="pl_devicemodel" value="">
+				<input type="hidden" id="pl_creative" name="pl_creative" value="">
+				<input type="hidden" id="pl_keyword" name="pl_keyword" value="">
+				<input type="hidden" id="pl_adposition" name="pl_adposition" value="">
+				<input type="hidden" id="gclid" name="gclid" value="">
+				<input type="hidden" id="pl_page" name="pl_page" value="">	
+				<input type="hidden" id="pl_feeditemid" name="pl_feeditemid" value="">	
+				<input type="hidden" id="pl_targetid" name="pl_targetid" value="">	
+				<input type="hidden" id="pl_loc_physical_ms" name="pl_loc_physical_ms" value="">	
+				<input type="hidden" id="pl_loc_interest_ms" name="pl_loc_interest_ms" value="">	
+
+				<input type="hidden" name="pl_siteid" id="pl_siteid" value="19277">
+				<input type="hidden" name="pl_associatedsite" id="pl_associatedsite" value="www.pensionadvisers.co.uk/">
+				<input type="hidden" name="pl_leadgroupid" id="pl_leadgroupid" value="51530">	
+				<button class="submitBtn" type="button" title="Submit" id="next1">Submit</button>
+					</fieldset>
+
+					<fieldset id="step2" data-db-page-field-owner-id="5454">
+						<div id="step2a1" class="row col-12 pr-0 form-inline">
+			                <div class="col-2 col-sm-2 col-md-2 text-right">
+			                    <img src="assets/img/9f778e42-cb98-4ee8-981a-229498b22c12.png" class="rounded" style="height:30px ;width:30px;" alt="...">
+			                </div>
+			                <div class="col-10 offset-0 col-sm-10 offset-sm-0 col-md-10   offset-md-0 text-left">
+			                    <div class="pt-3 pb-3 pr-0 text-left"><h4>We need a little more information</h4></div>
+			                </div>
+			            </div>
+
+						<div id="step2a2" placeholder="Your martial status" value="default" id="form-1_F_694_PENSION_ADVICE_TYPE2_SELECT">
+						    <div class="input">
+						        <select id="martialstatus" name="martialstatus">
+						            <option value="" disabled selected >Select your martial status</option>
+						            <option id="Single" value="Single" >Single</option>
+						            <option id="Married" value="Married" >Married</option>
+						            <option id="Civil Partnership" value="Civil Partnership" >Civil Partnership</option>
+						            <option id="Divorced" value="Divorced" >Divorced</option>
+						            <option id="Widowed" value="Widowed" >Widowed</option>
+						        </select>
+						        <div class="error-message"></div>
+						    </div>
+						</div>
+
+						<div id="step2a3" placeholder="Enter your pension fund size" value="default" id="form-1_F_694_PENSION_ADVICE_TYPE2_SELECT">
+						    <div class="input">
+						        <select id="pensionfund" name="pensionfund">
+						            <option id="" value="" disabled selected >Enter your pension fund size</option>
+						            <option id="£100k" value="£100k" >< £100k</option>
+						            <option id="£200k" value="£200k" >< £200k</option>
+						            <option id="£300k" value="£300k" >< £300k</option>
+						            <option id="£300k+" value="£300k+" >£300k+</option>
+						        </select>
+						        <div class="error-message"></div>
+						    </div>
+						</div>
+
+						<div id="step2b1" class="row col-12 pr-0 form-inline">
+			                  <div class="col-12">
+			                     <h2>We’re searching now!</h2>
+			                  </div>
+			            </div>
+						<div id="step2b2" class="row col-12 pr-0 form-inline">
+			                <div class="col-12 text-left">	
+			            		<h5>To help us narrow it down, please tell us more about the advice you need.</h5>
+			            	</div>
+			            </div>
+						<div id="step2b3" class="row col-12 pr-0 form-inline">
+			                <div class="col-12 text-left">	
+			            		<h5>Providing more details will allow us to find the best financial adviser for you.</h5>
+			            	</div>
+			            </div>
+						<div id="step2b4">
+						    <div class="input">
+						        <input type="text" id="moredetails" name="moredetails" placeholder="E.g. I have a lump sum / excess income to spare, and I want to know where and how I should invest it"  value="" style="height: 15em!important;">
+						        <div class="error-message"></div>
+						    </div>
+						</div>
+
+
+						<button class="submitBtn" type="button" title="Select my Pension Provider" id="next2">Submit</button>
+					</h1></fieldset>
+
+
+					<fieldset id="step3">
+						<h5>We Use Your Personal Information In Order To Deal With Your Request. We Will Never Send Your Details To Any Companies
+							Other Than The Financial Advisor We Recommend For You
+						</h5>
+						<hr>
+						<h5>Please Enter Your Details Below</h5>
+						<div>
+    <div class="input">
+        <input type="text" id="firstname" name="firstname" placeholder="First Name" value="">
+        <div class="error-message"></div>
+    </div>
+</div>
+						<div>
+    <div class="input">
+        <input type="text" id="lastname" name="lastname" placeholder="Last Name" value="">
+        <div class="error-message"></div>
+    </div>
+</div>
+						<div>
+    <div class="input">
+        <input type="text" id="email" name="email" placeholder="Email" value="">
+        <div class="error-message"></div>
+    </div>
+</div>
+						<div>
+    <div class="input">
+        <input type="text" id="phone" name="phone" placeholder="Phone" value="">
+        <div class="error-message"></div>
+    </div>
+</div>
+						<input class="submitBtn" type="submit" title="Select my Pension Provider" value="Select my Pension Provider">
+					</fieldset>
+
+
+        </form>
+</div> <!-- formContainerBox -->
+
+
+      </div>
+    </div>
+</div> <!-- container marketing --> 
+</div> <!--  container-fluid -->
+
+</body>
+
+
+
+<script type="text/javascript">
+
+$(document).ready(function () {
+
+    var getUrlParameter = function getUrlParameter(sParam) {
+        var sPageURL = window.location.search.substring(1),
+            sURLVariables = sPageURL.split('&'),
+            sParameterName,
+            i;
+
+        for (i = 0; i < sURLVariables.length; i++) {
+            sParameterName = sURLVariables[i].split('=');
+
+            if (sParameterName[0] === sParam) {
+                return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+                console(sParam);
+            }
+        }
+    };
+
+    var pl_matchtype = getUrlParameter('pl_matchtype');
+    var pl_campaignid = getUrlParameter('pl_campaignid');
+    var pl_adgroupid = getUrlParameter('pl_adgroupid');
+    var pl_network = getUrlParameter('pl_network');
+    var pl_device = getUrlParameter('pl_device');
+    var pl_devicemodel = getUrlParameter('pl_devicemodel');
+    var pl_creative = getUrlParameter('pl_creative');
+    var pl_keyword = getUrlParameter('pl_keyword');
+    var pl_adposition = getUrlParameter('pl_adposition');
+    var gclid = getUrlParameter('gclid');
+    var pl_page = getUrlParameter('pl_page');
+    var pl_feeditemid = getUrlParameter('pl_feeditemid');
+    var pl_targetid = getUrlParameter('pl_targetid');
+    var pl_loc_physical_ms = getUrlParameter('pl_loc_physical_ms');
+    var pl_loc_interest_ms = getUrlParameter('pl_loc_interest_ms');
+
+    $("*[name='pl_matchtype']").val(pl_matchtype).trigger('change');
+    $("*[name='pl_campaignid']").val(pl_campaignid).trigger('change');
+    $("*[name='pl_adgroupid']").val(pl_adgroupid).trigger('change');
+    $("*[name='pl_network']").val(pl_network).trigger('change');
+    $("*[name='pl_device']").val(pl_device).trigger('change');
+    $("*[name='pl_devicemodel']").val(pl_devicemodel).trigger('change');
+    $("*[name='pl_creative']").val(pl_creative).trigger('change');
+    $("*[name='pl_keyword']").val(pl_keyword).trigger('change');
+    $("*[name='pl_adposition']").val(pl_adposition).trigger('change');
+    $("*[name='gclid']").val(gclid).trigger('change');
+    $("*[name='pl_page']").val(pl_page).trigger('change');
+    $("*[name='pl_feeditemid']").val(pl_feeditemid).trigger('change');
+    $("*[name='pl_targetid']").val(pl_targetid).trigger('change');
+    $("*[name='pl_loc_physical_ms']").val(pl_loc_physical_ms).trigger('change');
+    $("*[name='pl_loc_interest_ms']").val(pl_loc_interest_ms).trigger('change');
+
+});
+
+
+$(document).ready(function () {
+    $("#step2").hide();
+    $("#step3").hide();
+    $("#next1").click(function () {
+        if ((document.getElementById("General Retirement").selected || document.getElementById("General Pension").selected) && ($("*[name='postcode']").val() != "")
+        ){
+
+        	var adviceSelect1;
+            if (document.getElementById("General Retirement").selected) {adviceSelect1 = "General Retirement"} 
+            else if (document.getElementById("General Pension").selected) {adviceSelect1 = "General Pension"}
+            else {adviceSelect1 = "Other"}
+
+            $("#step2a1").hide();
+            $("#step2a2").hide();
+            $("#step2a3").hide();
+            $("#step1").hide();
+            $("#step2").show();
+            $("*[name='F_100_FINANCIAL_ADVICE_TYPE']").val(adviceSelect1).trigger('change');
+
+        } else if ((document.getElementById("Final Salary").selected || document.getElementById("Defined Benefit Pension").selected) && ($("*[name='postcode']").val() != "")
+        ){
+
+        	var adviceSelect2;
+            if (document.getElementById("Final Salary").selected) {adviceSelect2 = "Final Salary"}
+            else if (document.getElementById("Defined Benefit Pension").selected) {adviceSelect2 = "Defined Benefit Pension"}
+            else {adviceSelect2 = "Other"}
+
+            $("#step2b1").hide();
+            $("#step2b2").hide();
+            $("#step2b3").hide();
+            $("#step2b4").hide();
+            $("#step1").hide();
+            $("#step2").show();
+            $("*[name='F_100_FINANCIAL_ADVICE_TYPE']").val(adviceSelect2).trigger('change');
+
+
+        } else if ((document.getElementById("Annuity").selected || document.getElementById("Drawdown").selected
+        || document.getElementById("Pension Transfer").selected || document.getElementById("Pension Review").selected
+        || document.getElementById("New Pension").selected ) && ($("*[name='postcode']").val() != "")
+        ){
+        	var adviceSelect3;
+            if (document.getElementById("Annuity").selected) {adviceSelect3 = "Annuity"} 
+            else if (document.getElementById("Drawdown").selected) {adviceSelect3 = "Drawdown"}
+            else if (document.getElementById("Pension Transfer").selected) {adviceSelect3 = "Pension Transfer"}
+            else if (document.getElementById("Pension Review").selected) {adviceSelect3 = "Pension Review"}
+            else if (document.getElementById("New Pension").selected) {adviceSelect3 = "New Pension"}
+            else {adviceSelect3 = "Other"}
+
+            $("*[name='F_100_FINANCIAL_ADVICE_TYPE']").val(adviceSelect3).trigger('change');
+
+
+            $("#step1").hide();
+            $("#step3").show();
+        
+        } else {
+            alert('Please fill in all the required fields.');
+        }
+    });
+    $("#next2").click(function () {
+        if  ((document.getElementById("General Retirement").selected || document.getElementById("General Pension").selected) || 
+        	((document.getElementById("Single").selected || document.getElementById("Married").selected
+        || document.getElementById("Civil Partnership").selected || document.getElementById("Divorced").selected
+        || document.getElementById("Widowed").selected) && (document.getElementById("£100k").selected
+        || document.getElementById("£200k").selected || document.getElementById("£300k").selected
+        || document.getElementById("£300k+").selected))
+        ){
+
+        	var maritalSelect;
+            if (document.getElementById("Single").selected) {maritalSelect = "Single"} 
+            else if (document.getElementById("Married").selected) {maritalSelect = "Married"}
+            else if (document.getElementById("Civil Partnership").selected) {maritalSelect = "Civil Partnership"}
+            else if (document.getElementById("Divorced").selected) {maritalSelect = "Divorced"}
+            else if (document.getElementById("Widowed").selected) {maritalSelect = "Widowed"}
+            else {maritalSelect = "Other"}
+            
+			var pensionPotSelect;
+            if (document.getElementById("£100k").selected) {pensionPotSelect = "< £100k"} 
+            else if (document.getElementById("£200k").selected) {pensionPotSelect = "< £200k"}
+            else if (document.getElementById("£300k").selected) {pensionPotSelect = "< £300k"}
+            else if (document.getElementById("£300k+").selected) {pensionPotSelect = "< £300k+"}
+            else {pensionPotSelect = "Other"}
+
+            $("*[name='F_100_FINANCIAL_ADVICE_TYPE']").val(maritalSelect).trigger('change');
+        	$("*[name='F_100_FINANCIAL_ADVICE_TYPE']").val(pensionPotSelect).trigger('change');
+            $("#step2").hide();
+            $("#step3").show();
+
+        } else {
+            alert('Please make your selections from the required fields.');
+        }
+    });
+});
+</script>
+
+
+</html>
