@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="src/css/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="src/css/materialize.min.css">
+  <title>Weather Hourly Temperature</title>
+</head>
+
+<body>
+  <div class="container" id="homePage">
+    <h4 class="center">Bradford Hourly Weather Observation versus North East Leads</h4>
+    <div class="input-field" id="forminput">
+      <div class="row">
+        <div class="col s12 m6 l6">
+          <label for="weekday">
+            Select Day of Week
+          </label>
+          <select id="weekday" class="browser-default" required>
+            <option value="" disabled selected>Choose your option</option>
+            <option value="1">Sunday 1</option>
+            <option value="2">Monday 2</option>
+            <option value="3">Tuesday 3</option>
+            <option value="4">Wednesday 4</option>
+            <option value="5">Thursday 5</option>
+            <option value="6" selected>Friday 6</option>
+            <option value="7">Saturday 7</option>
+          </select>
+        </div>
+        <div class="col s12 m6 l6">
+          <label for="hour">
+            Select Hour
+          </label>
+          <select id="hour" class="browser-default" required>
+            <option value="" disabled selected>Choose your option</option>
+            <option value="0">00</option>
+            <option value="1">01</option>
+            <option value="2">02</option>
+            <option value="3">03</option>
+            <option value="4">04</option>
+            <option value="5">05</option>
+            <option value="6">06</option>
+            <option value="7">07</option>
+            <option value="8">08</option>
+            <option value="9">09</option>
+            <option value="10">10</option>
+            <option value="11" selected>11</option>
+            <option value="12">12</option>
+            <option value="13">13</option>
+            <option value="14">14</option>
+            <option value="15">15</option>
+            <option value="16">16</option>
+            <option value="17">17</option>
+            <option value="18">18</option>
+            <option value="19">19</option>
+            <option value="20">20</option>
+            <option value="21">21</option>
+            <option value="22">22</option>
+            <option value="23">23</option>
+            <option value="24">24</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12 m6 l6">
+          <label for="airtemp">
+            Enter the Air Temperature
+          </label>
+          <input type="text" name="airtemp" id="airtemp" value="5.2" required>
+        </div>
+        <div class="col s12 m6 l6">
+          <label for="dewpoint">
+            Dewpoint
+          </label>
+          <input type="text" name="dewpoint" id="dewpoint" value="0.3" required>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12 m6 l6">
+          <label for="wbt">
+            Wet Bulb Temperature
+          </label>
+          <input type="text" name="wbt" id="wbt" value="3.3" required>
+        </div>
+        <div class="col s12 m6 l6">
+          <label for="humidity">
+            Relative Humidity
+          </label>
+          <input type="text" name="humidity" id="humidity" value="70.3" required>
+        </div>
+      </div>
+    </div>
+    <p class="center-align">
+    <a class="waves-effect waves-light btn" onclick="show()">Check</a>
+    </p>
+  </div>
+  <!-- Compiled and minified JavaScript -->
+  <script src="src/js/materialize.min.js"></script>
+  <script src="src/js/brain.js"></script>
+  <script src="src/js/app_ne.js"></script>
+  <script>
+    function show(){
+      let weekdayv = document.getElementById("weekday").value
+      let hourv = document.getElementById("hour").value
+      let airtempv = document.getElementById("airtemp").value
+      let dewpointv = document.getElementById("dewpoint").value
+      let wbtv = document.getElementById("wbt").value
+      let humidityv = document.getElementById("humidity").value
+
+      if(weekdayv==''||hourv==''||airtempv==''||dewpointv==''||wbtv==''||humidityv=='')
+        return M.toast({html: 'Please Enter all the values'})
+
+      let object_to_predict = {
+        weekday: weekdayv,
+        hour: hourv,
+        airtemp: airtempv,
+        dewpoint: dewpointv,
+        wbt: wbtv,
+        humidity: humidityv
+      }
+      const output = net.run(object_to_predict).Result;
+      const final_result = ((output)*100).toFixed(2)
+      const toastHTML = '<span>Success Rate: '+final_result+' %</span>'
+      return M.toast({html: toastHTML})
+    }
+
+  </script>
+</body>
+
+</html>
