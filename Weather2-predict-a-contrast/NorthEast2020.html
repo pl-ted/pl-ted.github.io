@@ -15,7 +15,7 @@
 <body>
 
 <div class="container" id="homePage">
-    <h4 class="center">North East Leads based on Bradford Hourly Weather Observation stats</h4>
+    <h4 class="center">Bradford Hourly Weather Observation versus 2020 North East Leads</h4>
     <div class="input-field" id="forminput">
       <div class="row">
         <div class="col s12 m6 l6">
@@ -95,17 +95,28 @@
           <input type="text" name="humidity" id="humidity" value="70.3" required>
         </div>
       </div>
+      <div class="col s12 m12 l6">
+      <label>
+        <p>Example:</p>
+        <p>Weekday: 7,  Hour: 7, Airtemp: 6.6, Dewpoint: 4.7, wbt: 5.8, Humidity: 88, Output: 0</p>
+        <p>Weekday: 7, Hour: 8, Airtemp: 6.7, Dewpoint: 4.3, wbt: 5.7 , Humidity: 85.1, Output: 1</p>
+  
+      </label>
+    </div>
     </div>
     <p class="center-align">
     <a class="waves-effect waves-light btn" onclick="submit()">Check</a>
     </p>
     <div class="row">
-		<div class="col s12 m12 l6">
-	      <div for="result" id="label" style="font-size: 16px;">
+		  <div >
+	      <div class="col s12 " for="result" id="label" style="font-size: 16px;background-color: lightgrey; color: white;">
 	        
 	      </div>
 	    </div>
     </div>
+    <div>
+    
+
   </div>
 
 
@@ -114,7 +125,18 @@
 
 <script>
 // Create a Neural Network
-const net = new brain.NeuralNetwork();
+
+
+const config = {
+ // inputSize: 20,
+ // inputRange: 20,
+  hiddenLayers: [6],
+ // outputSize: 20,
+  learningRate: 0.01,
+  decayRate: 0.999,
+};
+
+const net = new brain.NeuralNetwork(config);
 
 // Train the Network with input objects
 net.train([
@@ -2366,6 +2388,7 @@ function submit() {
 		      }
 		      let output = net.run(object_to_predict).Result;
 		      const final_result = ((output)*100).toFixed(2)
+          console.log("pressed");
 
 			  // Display the probability 
 			  document.getElementById("label").innerHTML = "Result: " + final_result + " %";
