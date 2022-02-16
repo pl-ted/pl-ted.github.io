@@ -1,4 +1,14 @@
-const net = new brain.NeuralNetwork();
+
+const config = {
+ // inputSize: 20,
+ // inputRange: 20,
+  hiddenLayers: [3],
+ // outputSize: 20,
+  learningRate: 0.01,
+  decayRate: 0.999,
+};
+
+const net = new brain.NeuralNetwork(config);
 
     net.train([
 
