@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="src/css/materialize.min.css">
 
 <script src="src/js/brain.js"></script>
+<script src="src/js/jquery.min.js"></script>
 
 </head>
 
@@ -105,14 +106,24 @@
     </div>
     </div>
     <p class="center-align">
-    <a class="waves-effect waves-light btn" onclick="submit()">Check</a>
+    <!-- <a class="waves-effect waves-light btn" onclick="submit()">Check</a>  -->
+    <a class="waves-effect waves-light btn" id="submit">Run Data</a>
+
     </p>
     <div class="row">
-		  <div >
-	      <div class="col s12 " for="result" id="label" style="font-size: 16px;background-color: lightgrey; color: white;">
+       <label class="" for="result" id="input" style="">
+          
+       </label>
+    </div>
+    <div class="row">
+	     <div class="col s12 " for="result" id="result" style="font-size: 16px;background-color: lightgrey; color: white;">
 	        
-	      </div>
-	    </div>
+	     </div>
+    </div>
+    <div class="row">
+       <label class="" for="result" id="info" style="">
+          
+       </label>
     </div>
     <div>
     
@@ -124,23 +135,40 @@
 
 
 <script>
-// Create a Neural Network
 
 
-const config = {
- // inputSize: 20,
- // inputRange: 20,
- hiddenLayers: [3],
- // hiddenLayers: [4, 4],
- // outputSize: 20,
-  learningRate: 0.01,
-  decayRate: 0.999,
-};
+$(document).ready(function () {
 
-const net = new brain.NeuralNetwork(config);
+function calculateMessage(){
+    document.getElementById("submit").innerHTML = "Running.. Please give me a few minutes.";
+    document.getElementById("input").innerHTML = "";
+    document.getElementById("result").innerHTML = "Calculating.. ";   
+    document.getElementById("info").innerHTML = "";
 
-// Train the Network with input objects
-net.train([
+    setTimeout(function() {
+    trainData(); 
+    }, 2000);
+
+
+}
+
+function trainData(){
+    // Create a Neural Network
+    
+    const config = {
+     // inputSize: 20,
+     // inputRange: 20,
+     hiddenLayers: [3],
+     // hiddenLayers: [4, 4],
+     // outputSize: 20,
+      learningRate: 0.6,
+     // decayRate: 0.999,
+    };
+
+    const net = new brain.NeuralNetwork(config);
+
+    // Train the Network with input objects
+    let trainInfo = net.train([
 
 
  {input: {"weekday":"6","hour":"0","airtemp":"10","dewpoint":"8.2","wbt":"9.1","humidity":"88.3"}, output: {"Result":"0"} },
@@ -2360,98 +2388,134 @@ net.train([
  {input: {"weekday":"7","hour":"6","airtemp":"4.9","dewpoint":"3","wbt":"4.1","humidity":"87.2"}, output: {"Result":"0"} },
  {input: {"weekday":"7","hour":"7","airtemp":"6.1","dewpoint":"3.4","wbt":"5","humidity":"83.3"}, output: {"Result":"0"} },
 
-]);
+    ], {
+      // Defaults values --> expected validation
+      iterations: 20000, // the maximum times to iterate the training data --> number greater than 0
+      //errorThresh: 0.005, // the acceptable error percentage from training data --> number between 0 and 1
+      //log: false, // true to use console.log, when a function is supplied it is used --> Either true or a function
+      //logPeriod: 10, // iterations between logging out --> number greater than 0
+      //learningRate: 0.3, // scales with delta to effect training rate --> number between 0 and 1
+      //momentum: 0.1, // scales with next layer's change value --> number between 0 and 1
+      //callback: null, // a periodic call back that can be triggered while training --> null or function
+      //callbackPeriod: 10, // the number of iterations through the training data between callback calls --> number greater than 0
+      //timeout: Infinity, // the max number of milliseconds to train for --> number greater than 0
+    } );
+
+    console.log('training complete...');
+    console.log(trainInfo);
+    submit();
 
 
+    function submit() {
+    	// let result = net.run({"weekday":"6","hour":"13","airtemp":"6.8","dewpoint":"1","wbt":"4.5","humidity":"66.7"});
+
+          let weekdayv = document.getElementById("weekday").value
+          let hourv = document.getElementById("hour").value
+          let airtempv = document.getElementById("airtemp").value
+          let dewpointv = document.getElementById("dewpoint").value
+          let wbtv = document.getElementById("wbt").value
+          let humidityv = document.getElementById("humidity").value
+
+          console.log(weekdayv);
 
 
-
-function submit() {
-	// let result = net.run({"weekday":"6","hour":"13","airtemp":"6.8","dewpoint":"1","wbt":"4.5","humidity":"66.7"});
-
-      let weekdayv = document.getElementById("weekday").value
-      let hourv = document.getElementById("hour").value
-      let airtempv = document.getElementById("airtemp").value
-      let dewpointv = document.getElementById("dewpoint").value
-      let wbtv = document.getElementById("wbt").value
-      let humidityv = document.getElementById("humidity").value
-
-      if(weekdayv==''||hourv==''||airtempv==''||dewpointv==''||wbtv==''||humidityv=='')
-        document.getElementById("label").innerHTML = "Please Enter all the values";
-      
-		      let object_to_predict = {
-		        weekday: weekdayv,
-		        hour: hourv,
-		        airtemp: airtempv,
-		        dewpoint: dewpointv,
-		        wbt: wbtv,
-		        humidity: humidityv
-		      }
-		      let output = net.run(object_to_predict).Result;
-		      const final_result = ((output)*100).toFixed(2)
-
-          let object_to_predict08 = {weekday: weekdayv, hour: 8, airtemp: airtempv, dewpoint: dewpointv, wbt: wbtv, humidity: humidityv};
-          let output08 = net.run(object_to_predict08).Result;
-          const final_result08 = ((output08)*100).toFixed(2);
-
-          let object_to_predict09 = {weekday: weekdayv, hour: 9, airtemp: airtempv, dewpoint: dewpointv, wbt: wbtv, humidity: humidityv};
-          let output09 = net.run(object_to_predict09).Result;
-          const final_result09 = ((output09)*100).toFixed(2);
-
-          let object_to_predict10 = {weekday: weekdayv, hour: 10, airtemp: airtempv, dewpoint: dewpointv, wbt: wbtv, humidity: humidityv};
-          let output10 = net.run(object_to_predict10).Result;
-          const final_result10 = ((output10)*100).toFixed(2);
-
-          let object_to_predict11 = {weekday: weekdayv, hour: 11, airtemp: airtempv, dewpoint: dewpointv, wbt: wbtv, humidity: humidityv};
-          let output11 = net.run(object_to_predict11).Result;
-          const final_result11 = ((output11)*100).toFixed(2);
-
-          let object_to_predict12 = {weekday: weekdayv, hour: 12, airtemp: airtempv, dewpoint: dewpointv, wbt: wbtv, humidity: humidityv};
-          let output12 = net.run(object_to_predict12).Result;
-          const final_result12 = ((output12)*100).toFixed(2);
-
-          let object_to_predict13 = {weekday: weekdayv, hour: 13, airtemp: airtempv, dewpoint: dewpointv, wbt: wbtv, humidity: humidityv};
-          let output13 = net.run(object_to_predict13).Result;
-          const final_result13 = ((output13)*100).toFixed(2);
-
-          let object_to_predict14 = {weekday: weekdayv, hour: 14, airtemp: airtempv, dewpoint: dewpointv, wbt: wbtv, humidity: humidityv};
-          let output14 = net.run(object_to_predict14).Result;
-          const final_result14 = ((output14)*100).toFixed(2);
-
-          let object_to_predict15 = {weekday: weekdayv, hour: 15, airtemp: airtempv, dewpoint: dewpointv, wbt: wbtv, humidity: humidityv};
-          let output15 = net.run(object_to_predict15).Result;
-          const final_result15 = ((output15)*100).toFixed(2);
-
-          let object_to_predict16 = {weekday: weekdayv, hour: 16, airtemp: airtempv, dewpoint: dewpointv, wbt: wbtv, humidity: humidityv};
-          let output16 = net.run(object_to_predict16).Result;
-          const final_result16 = ((output16)*100).toFixed(2);
-
-          let object_to_predict17 = {weekday: weekdayv, hour: 17, airtemp: airtempv, dewpoint: dewpointv, wbt: wbtv, humidity: humidityv};
-          let output17 = net.run(object_to_predict17).Result;
-          const final_result17 = ((output17)*100).toFixed(2);
-
-          let object_to_predict18 = {weekday: weekdayv, hour: 18, airtemp: airtempv, dewpoint: dewpointv, wbt: wbtv, humidity: humidityv};
-          let output18 = net.run(object_to_predict18).Result;
-          const final_result18 = ((output18)*100).toFixed(2);
-
-          let object_to_predict19 = {weekday: weekdayv, hour: 19, airtemp: airtempv, dewpoint: dewpointv, wbt: wbtv, humidity: humidityv};
-          let output19 = net.run(object_to_predict19).Result;
-          const final_result19 = ((output19)*100).toFixed(2);
-
-          let object_to_predict20 = {weekday: weekdayv, hour: 20, airtemp: airtempv, dewpoint: dewpointv, wbt: wbtv, humidity: humidityv};
-          let output20 = net.run(object_to_predict20).Result;
-          const final_result20 = ((output20)*100).toFixed(2);
-
-          let object_to_predict21 = {weekday: weekdayv, hour: 21, airtemp: airtempv, dewpoint: dewpointv, wbt: wbtv, humidity: humidityv};
-          let output21 = net.run(object_to_predict21).Result;
-          const final_result21 = ((output21)*100).toFixed(2);
+          if(weekdayv==''||hourv==''||airtempv==''||dewpointv==''||wbtv==''||humidityv=='')
+            document.getElementById("result").innerHTML = "Please Enter all the values";
           
-          console.log("pressed");
+    		      let object_to_predict = {
+    		        weekday: weekdayv,
+    		        hour: hourv,
+    		        airtemp: airtempv,
+    		        dewpoint: dewpointv,
+    		        wbt: wbtv,
+    		        humidity: humidityv
+    		      }
+    		      let output = net.run(object_to_predict).Result;
+    		      const final_result = ((output)*100).toFixed(2)
 
-			  // Display the probability 
-			  document.getElementById("label").innerHTML = "Result: "  + final_result + " %"  + "<br>"  + "Hour 08: " + final_result08 + " %" + "<br>"  + "Hour 09: " + final_result09  + " %" + "<br>"  + "Hour 10: " + final_result10 + " %" + "<br>"  + "Hour 11: " + final_result11 + " %" + "<br>"  + "Hour 12: " + final_result12 + " %" + "<br>"  + "Hour 13: " + final_result13 + " %" + "<br>"  + "Hour 14: " + final_result14 + " %" + "<br>"  + "Hour 15: " + final_result15 + " %" + "<br>"  + "Hour 16: " + final_result16 + " %" + "<br>"  + "Hour 17: " + final_result17 + " %" + "<br>"  + "Hour 18: " + final_result18 + " %" + "<br>"  + "Hour 19: " + final_result19 + " %" + "<br>"  + "Hour 20: " + final_result20 + " %" + "<br>"  + "Hour 21: " + final_result21 + " %";
-	  
-}
+              let object_to_predict08 = {weekday: weekdayv, hour: 8, airtemp: airtempv, dewpoint: dewpointv, wbt: wbtv, humidity: humidityv};
+              let output08 = net.run(object_to_predict08).Result;
+              const final_result08 = ((output08)*100).toFixed(2);
+
+              let object_to_predict09 = {weekday: weekdayv, hour: 9, airtemp: airtempv, dewpoint: dewpointv, wbt: wbtv, humidity: humidityv};
+              let output09 = net.run(object_to_predict09).Result;
+              const final_result09 = ((output09)*100).toFixed(2);
+
+              let object_to_predict10 = {weekday: weekdayv, hour: 10, airtemp: airtempv, dewpoint: dewpointv, wbt: wbtv, humidity: humidityv};
+              let output10 = net.run(object_to_predict10).Result;
+              const final_result10 = ((output10)*100).toFixed(2);
+
+              let object_to_predict11 = {weekday: weekdayv, hour: 11, airtemp: airtempv, dewpoint: dewpointv, wbt: wbtv, humidity: humidityv};
+              let output11 = net.run(object_to_predict11).Result;
+              const final_result11 = ((output11)*100).toFixed(2);
+
+              let object_to_predict12 = {weekday: weekdayv, hour: 12, airtemp: airtempv, dewpoint: dewpointv, wbt: wbtv, humidity: humidityv};
+              let output12 = net.run(object_to_predict12).Result;
+              const final_result12 = ((output12)*100).toFixed(2);
+
+              let object_to_predict13 = {weekday: weekdayv, hour: 13, airtemp: airtempv, dewpoint: dewpointv, wbt: wbtv, humidity: humidityv};
+              let output13 = net.run(object_to_predict13).Result;
+              const final_result13 = ((output13)*100).toFixed(2);
+
+              let object_to_predict14 = {weekday: weekdayv, hour: 14, airtemp: airtempv, dewpoint: dewpointv, wbt: wbtv, humidity: humidityv};
+              let output14 = net.run(object_to_predict14).Result;
+              const final_result14 = ((output14)*100).toFixed(2);
+
+              let object_to_predict15 = {weekday: weekdayv, hour: 15, airtemp: airtempv, dewpoint: dewpointv, wbt: wbtv, humidity: humidityv};
+              let output15 = net.run(object_to_predict15).Result;
+              const final_result15 = ((output15)*100).toFixed(2);
+
+              let object_to_predict16 = {weekday: weekdayv, hour: 16, airtemp: airtempv, dewpoint: dewpointv, wbt: wbtv, humidity: humidityv};
+              let output16 = net.run(object_to_predict16).Result;
+              const final_result16 = ((output16)*100).toFixed(2);
+
+              let object_to_predict17 = {weekday: weekdayv, hour: 17, airtemp: airtempv, dewpoint: dewpointv, wbt: wbtv, humidity: humidityv};
+              let output17 = net.run(object_to_predict17).Result;
+              const final_result17 = ((output17)*100).toFixed(2);
+
+              let object_to_predict18 = {weekday: weekdayv, hour: 18, airtemp: airtempv, dewpoint: dewpointv, wbt: wbtv, humidity: humidityv};
+              let output18 = net.run(object_to_predict18).Result;
+              const final_result18 = ((output18)*100).toFixed(2);
+
+              let object_to_predict19 = {weekday: weekdayv, hour: 19, airtemp: airtempv, dewpoint: dewpointv, wbt: wbtv, humidity: humidityv};
+              let output19 = net.run(object_to_predict19).Result;
+              const final_result19 = ((output19)*100).toFixed(2);
+
+              let object_to_predict20 = {weekday: weekdayv, hour: 20, airtemp: airtempv, dewpoint: dewpointv, wbt: wbtv, humidity: humidityv};
+              let output20 = net.run(object_to_predict20).Result;
+              const final_result20 = ((output20)*100).toFixed(2);
+
+              let object_to_predict21 = {weekday: weekdayv, hour: 21, airtemp: airtempv, dewpoint: dewpointv, wbt: wbtv, humidity: humidityv};
+              let output21 = net.run(object_to_predict21).Result;
+              const final_result21 = ((output21)*100).toFixed(2);
+              
+              const trainInfo_value = trainInfo;
+
+              console.log(final_result21);
+
+              document.getElementById("input").innerHTML = "Input: " + "weekday: " + weekdayv + ", airtemp: " + airtempv + ", dewpoint: " + dewpointv + ", wbt: " + wbtv + ", humidity: " + humidityv ;
+
+      			  // Display the probability 
+      			  document.getElementById("result").innerHTML = "Result: "  + final_result + " %"  + "<br>"  + "Hour 08: " + final_result08 + " %" + "<br>"  + "Hour 09: " + final_result09  + " %" + "<br>"  + "Hour 10: " + final_result10 + " %" + "<br>"  + "Hour 11: " + final_result11 + " %" + "<br>"  + "Hour 12: " + final_result12 + " %" + "<br>"  + "Hour 13: " + final_result13 + " %" + "<br>"  + "Hour 14: " + final_result14 + " %" + "<br>"  + "Hour 15: " + final_result15 + " %" + "<br>"  + "Hour 16: " + final_result16 + " %" + "<br>"  + "Hour 17: " + final_result17 + " %" + "<br>"  + "Hour 18: " + final_result18 + " %" + "<br>"  + "Hour 19: " + final_result19 + " %" + "<br>"  + "Hour 20: " + final_result20 + " %" + "<br>"  + "Hour 21: " + final_result21 + " %";
+    	  
+
+              document.getElementById("info").innerHTML = "Training Info: " + JSON.stringify(trainInfo_value, null, 2);
+
+              document.getElementById("submit").innerHTML = "Calculation Completed. Click Here to Run Again.";
+            
+    } // submit()
+
+  } //trainData()
+
+
+    //$(document).on('click', '#submit', function(){ 
+    $("#submit").click(function () {
+            calculateMessage(); 
+            console.log("submit");
+    });
+
+})
+
 </script>
 </body>
 </html>
