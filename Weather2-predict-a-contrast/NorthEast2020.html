@@ -11,13 +11,14 @@
 <script src="src/js/brain.js"></script>
 <script src="src/js/jquery.min.js"></script>
 <script src="src/js/trainDefault.js"></script>
-<script src="src/js/trainFeb.js"></script>
-<script src="src/js/trainMar.js"></script>
-<script src="src/js/trainApr.js"></script>
-<script src="src/js/trainMay.js"></script>
-<script src="src/js/trainJun.js"></script>
-<script src="src/js/trainJul.js"></script>
-
+<script src="src/js/trainNE-JanMar.js"></script>
+<script src="src/js/trainNE-Apr-Jun.js"></script>
+<script src="src/js/trainNE-JulSep.js"></script>
+<script src="src/js/trainNE-OctDec.js"></script>
+<script src="src/js/trainNENW-JanMar.js"></script>
+<script src="src/js/trainNENW-Apr-Jun.js"></script>
+<script src="src/js/trainNENW-JulSep.js"></script>
+<script src="src/js/trainNENW-OctDec.js"></script>
 
 </head>
 
@@ -26,19 +27,21 @@
 <div class="container" id="homePage">
     <h4 class="center">Bradford Hourly Weather Observation versus 2020 North East Leads</h4>
     <div class="input-field" id="forminput">
-      <div class="row">
+      <div class="row" style="border-bottom: 1px solid #f2f2f2; padding-bottom: 10px;">
         <div class="col s12 m6 l4">
           <label for="period">
-            Select Training Data Period
+            Select Training Data Set
           </label>
           <select id="period" class="browser-default" required>
             <option value="" disabled selected>Choose your option</option>
-            <option value="2" selected>Feb</option>
-            <option value="3">Mar</option>
-            <option value="4">Apr</option>
-            <option value="5">May</option>
-            <option value="6">Jun</option>
-            <option value="7">Jul</option>
+            <option value="1" selected>1 Jan-Mar NE</option>
+            <option value="2">2 Apr-Jun NE</option>
+            <option value="3">3 Jul-Sep NE</option>
+            <option value="4">4 Oct-Dec NE</option>
+            <option value="5">5 Jan-Mar NE/NW</option>
+            <option value="6">6 Apr-Jun NE/NW</option>
+            <option value="7">7 Jul-Sep NE/NW</option>
+            <option value="8">8 Oct-Dec NE/NW</option>
           </select>
         </div>
         <div class="col s12 m6 l4">
@@ -72,7 +75,7 @@
           </select>
         </div>
       </div>
-      <div class="row">
+      <div class="row" style="border-bottom: 1px solid #f2f2f2; padding-bottom: 10px;">
         <div class="col s12 m6 l6">
           <label for="weekday">
             Select Day of Week
@@ -227,26 +230,32 @@ function trainData(){
     let trainInfo = trainInfoDefault(net, iterationv, learningRatev);
     const period = parseInt(document.getElementById("period").value);
     switch(period) {
+      case 1:
+          trainInfo = trainInfoNEJanMar(net, iterationv, learningRatev);
+        break;
       case 2:
-          trainInfo = trainInfoFeb(net, iterationv, learningRatev);
+          trainInfo = trainInfoNEAprJun(net, iterationv, learningRatev);
         break;
       case 3:
-          trainInfo = trainInfoMar(net, iterationv, learningRatev);
+          trainInfo = trainInfoNEOctDec(net, iterationv, learningRatev);
         break;
       case 4:
-          trainInfo = trainInfoApr(net, iterationv, learningRatev);
+          trainInfo = trainInfoNEJulSep(net, iterationv, learningRatev);
         break;
       case 5:
-          trainInfo = trainInfoMay(net, iterationv, learningRatev);
+          trainInfo = trainInfoNENWJanMar(net, iterationv, learningRatev);
         break;
       case 6:
-          trainInfo = trainInfoJun(net, iterationv, learningRatev);
+          trainInfo = trainInfoNENWAprJun(net, iterationv, learningRatev);
         break;
       case 7:
-          trainInfo = trainInfoJul(net, iterationv, learningRatev);
+          trainInfo = trainInfoNENWJulSep(net, iterationv, learningRatev);
+        break;
+      case 8:
+          trainInfo = trainInfoNENWOctDec(net, iterationv, learningRatev);
         break;
       default:
-          trainInfo = trainInfoFeb(net, iterationv, learningRatev);
+          trainInfo = trainInfoNEJulSep(net, iterationv, learningRatev);
     }
     
 
@@ -257,6 +266,7 @@ function trainData(){
     function submit() {
     	// let result = net.run({"weekday":"6","hour":"13","airtemp":"6.8","dewpoint":"1","wbt":"4.5","humidity":"66.7"});
 
+          let periodv = document.getElementById("period").value
           let weekdayv = document.getElementById("weekday").value
           let hourv = document.getElementById("hour").value
           let airtempv = document.getElementById("airtemp").value
@@ -336,7 +346,7 @@ function trainData(){
               
               const trainInfo_value = trainInfo;
 
-              document.getElementById("input").innerHTML = "Input: " + "weekday: " + weekdayv + ", airtemp: " + airtempv + ", dewpoint: " + dewpointv + ", wbt: " + wbtv + ", humidity: " + humidityv ;
+              document.getElementById("input").innerHTML = "Input: " + "dataset: " +  periodv + ", weekday: " + weekdayv + ", airtemp: " + airtempv + ", dewpoint: " + dewpointv + ", wbt: " + wbtv + ", humidity: " + humidityv ;
 
       			  // Display the probability 
       			  document.getElementById("result").innerHTML = "Result: "  + final_result + " %"  + "<br>"  + "Hour 08: " + final_result08 + " %" + "<br>"  + "Hour 09: " + final_result09  + " %" + "<br>"  + "Hour 10: " + final_result10 + " %" + "<br>"  + "Hour 11: " + final_result11 + " %" + "<br>"  + "Hour 12: " + final_result12 + " %" + "<br>"  + "Hour 13: " + final_result13 + " %" + "<br>"  + "Hour 14: " + final_result14 + " %" + "<br>"  + "Hour 15: " + final_result15 + " %" + "<br>"  + "Hour 16: " + final_result16 + " %" + "<br>"  + "Hour 17: " + final_result17 + " %" + "<br>"  + "Hour 18: " + final_result18 + " %" + "<br>"  + "Hour 19: " + final_result19 + " %" + "<br>"  + "Hour 20: " + final_result20 + " %" + "<br>"  + "Hour 21: " + final_result21 + " %";
